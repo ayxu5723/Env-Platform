@@ -21,3 +21,15 @@ export const CREATE_VOTE = gql`
     }
   }
 `;
+
+export const USER_LOGIN = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      profile {
+        _id
+        username
+      }
+    }
+  }
+`;

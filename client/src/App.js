@@ -24,8 +24,8 @@ function App() {
               element={<Home />}
             />
             // {/* <Route 
-            //   path="/matchup" 
-            //   element={<Matchup />}
+            //   path="/about" 
+            //   element={<About />}
             // />
             // <Route 
             //   path="/matchup/:id" 

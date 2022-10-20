@@ -2,7 +2,7 @@
 // import { useQuery } from '@apollo/client';
 // import { QUERY_MATCHUPS } from '../utils/queries';
 // import { Header } from '../components/Header';
-import { SignIn } from '../components/SignIn';
+import { SignIn } from './Login';
 
 const Home = () => {
   // const { loading, data } = useQuery(QUERY_MATCHUPS, {
