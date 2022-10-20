@@ -60,15 +60,15 @@ const typeDefs = gql`
     orgLogin(email: String!, password: String!): orgAuth
     createAnnouncement(announcementText: String!): Announcement
     updateAnnouncement(_id: ID!, announcementText: String!): Announcement
-    deleteAnnouncement(_id:ID!): Announcement
+    deleteAnnouncement(_id: ID!): Announcement
     createComment(commentText: String!): Comment
     updateComment(_id: ID!, newcommentText: String!): Comment
     deleteComment(_id: ID!): Comment
   }
 
-  type Subscription{
-    updateDonation(donationAmount: Float!): Donation
-  }
+  # type Subscription{
+  #   updateDonation(donationAmount: Float!): Donation
+  # }
 `;
 
 module.exports = typeDefs;
