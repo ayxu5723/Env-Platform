@@ -172,7 +172,8 @@ export default function Header() {
             <Link to="/donation" className="text-base font-medium text-gray-500 hover:text-gray-900">
               Donate
             </Link>
-
+            {/* {user.role === 'organisation' && <Link to="/orgDash" className="text-base font-medium text-gray-500 hover:text-gray-900"> </Link>} */}
+            {/* conditional rendering of page based on user role */}
             <Popover className="relative">
               {({ open }) => (
                 <>

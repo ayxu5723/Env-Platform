@@ -5,7 +5,7 @@ import { USER_LOGIN } from '../utils/mutations';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import Auth from '../utils/auth';
 
-export default function Login() {
+function Login(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(USER_LOGIN);
 
@@ -94,6 +94,11 @@ export default function Login() {
                 />
               </div>
             </div>
+            {error ? ( 
+              <div>
+              <p className="relative block w-full items-center border  bg-red-600 border-gray-300 px-3 py-2 text-gray-900"> Incorrect email or password</p>
+              </div>
+              ) : null}
             <div>
               <button
                 type="submit"
@@ -111,3 +116,5 @@ export default function Login() {
     </>
   )
 }
+
+export default Login;

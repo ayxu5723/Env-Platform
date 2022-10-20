@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const commentSchema = require('./Comments');
 
 const announcementSchema = new Schema(
   {
@@ -19,8 +18,12 @@ const announcementSchema = new Schema(
       type: String,
       required: true,
     },
-    comments: [commentSchema],
-
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'comments',
+      },
+    ]
   },
   {
     toJSON: {
@@ -31,7 +34,7 @@ const announcementSchema = new Schema(
   }
 );
 
-commentSchema.virtual('commentCount').get(function () {
+announcementSchema.virtual('commentCount').get(function () {
   return this.comments.length;
 });
 

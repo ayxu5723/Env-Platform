@@ -45,11 +45,11 @@ const typeDefs = gql`
     me: User
     user(userId: ID!): User
     envorgs: [EnvOrg]
-    envorg(_id: ID!): EnvOrg!
+    envorg(orgId: ID!): EnvOrg!
     announcements: [Announcement]!
-    announcement: (_id: ID!): Announcement!
+    announcement (announcementId: ID!): Announcement!
     comments: [Comment]!
-    comment: (_id: ID!): Comment!
+    comment(commentId: ID!): Comment!
     
   }
 
@@ -59,11 +59,11 @@ const typeDefs = gql`
     createEnvOrg(name: String!, password: String!, email: String!): orgAuth
     orgLogin(email: String!, password: String!): orgAuth
     createAnnouncement(announcementText: String!): Announcement
-    updateAnnouncement(_id: ID!, announcementText: String!): Announcement
-    deleteAnnouncement(_id: ID!): Announcement
+    updateAnnouncement(orgId: ID!, announcementText: String!): Announcement
+    deleteAnnouncement(orgId: ID!): Announcement
     createComment(commentText: String!): Comment
-    updateComment(_id: ID!, newcommentText: String!): Comment
-    deleteComment(_id: ID!): Comment
+    updateComment(userId: ID!, newcommentText: String!): Comment
+    deleteComment(iserId: ID!): Comment
   }
 
   # type Subscription{

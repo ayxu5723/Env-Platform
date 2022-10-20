@@ -59,7 +59,7 @@ const resolvers = {
 
     createEnvOrg: async (parent, { name, email, password }) => {
       const env_org = await EnvOrg.create({ name, email, password });
-      const token = signToken(envorg);
+      const token = signToken(env_org);
       return { token, env_org };
     },
 

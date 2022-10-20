@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const announcementSchema = require ('./Announcements')
+
 
 const envorgSchema = new Schema({
   name: {
@@ -20,7 +20,6 @@ const envorgSchema = new Schema({
   },
   address: {
     type: String,
-    required: true,
   },
   announcements: [
     {
@@ -37,7 +36,7 @@ const envorgSchema = new Schema({
   }
 );
 
-announcementSchema.virtual('announcementCount').get(function () {
+envorgSchema.virtual('announcementCount').get(function () {
   return this.announcements.length;
 });
 
