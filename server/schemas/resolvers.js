@@ -1,25 +1,22 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, EnvOrg, Announcements, Comments, Donations } = require('../models');
+const { User, Announcements, Comments } = require('../models');
 const { signToken } = require('../utils/auth');
-
-
 
 const resolvers = {
   Query: {
+    users: async () => {
+      return User.find();
+    },
+
+    user: async (parent, { userId }) => {
+      return User.findOne({ _id: userId });
+    },
+    // By adding context to our query, we can retrieve the logged in user without specifically searching for them
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id});
+        return User.findOne({ _id: context.user._id });
       }
-      throw new AuthenticationError('Please Log in');
-    },
-    user: async (parent, { username }) => {
-      return User.findOne({ _id: username });
-    },
-    envorgs: async () => {
-      return EnvOrg.find();
-    },
-    envorg: async (parent, { orgId }) => {
-      return EnvOrg.findOne({ _id: orgId });
+      throw new AuthenticationError('You need to be logged in!');
     },
     announcements: async () => {
       return Announcements.find();
@@ -36,52 +33,32 @@ const resolvers = {
   },
 
   Mutation: {
-    createUser: async (parent, {username, email, password }) => {
-      const user = await User.create ({ username, email, password });
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
       const token = signToken(user);
+
       return { token, user };
     },
-
-    userLogin: async (parent, {email, password }) => {
+    login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
-      
+
       if (!user) {
-        throw new AuthenticationError('');
+        throw new AuthenticationError('No user with this email found!');
       }
 
       const correctPw = await user.isCorrectPassword(password);
+
       if (!correctPw) {
-        throw new AuthenticationError('');
+        throw new AuthenticationError('Incorrect password!');
       }
+
       const token = signToken(user);
       return { token, user };
     },
-
-    createEnvOrg: async (parent, { name, email, password }) => {
-      const env_org = await EnvOrg.create({ name, email, password });
-      const token = signToken(env_org);
-      return { token, env_org };
-    },
-
-    orgLogin: async (parent, {email, password }) => {
-      const org = await EnvOrg.findOne({ email });
-      
-      if (!org) {
-        throw new AuthenticationError('');
-      }
-
-      const correctPw = await org.isCorrectPassword(password);
-      if (!correctPw) {
-        throw new AuthenticationError('');
-      }
-      const token = signToken(org);
-      return { token, org };
-    },
-
-    createAnnouncement: async (parent, { orgId, announcementText}, context) => {
-      if (context.EnvOrg) {
-        const updatedOrg = await EnvOrg.findOneAndUpdate(
-          { _id: orgId },
+    createAnnouncement: async (parent, { userId, announcementText}, context) => {
+      if (context.User) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: userId },
           {
             $addToSet: { announcements: announcementText },
           },
@@ -89,16 +66,16 @@ const resolvers = {
             new: true,
           }
         )
-        return updatedOrg
+        return updatedUser
       }
       throw new AuthenticationError('Please Log In to create an announcement')
     },
 
-    updateAnnouncement: async (parent, { orgId, announcementId, newAnnouncementText }, context) => {
-      if (context.EnvOrg) {
-        const updatedOrg = await EnvOrg.findOneAndUpdate(
+    updateAnnouncement: async (parent, { userId, announcementId, newAnnouncementText }, context) => {
+      if (context.User) {
+        const updatedUser = await User.findOneAndUpdate(
           { 
-            _id: orgId,
+            _id: userId,
             "anouncement._id": announcementId
           },
           {
@@ -108,14 +85,14 @@ const resolvers = {
             new: true,
           }
         )
-        return updatedOrg
+        return updatedUser
       }
       throw new AuthenticationError('Please Log In to update an announcement')
     },
     deleteAnnouncement: async (parent, { announcement }, context) => {
-      if (context.EnvOrg) {
-        return EnvOrg.findOneAndUpdate(
-          { _id: context.envorg._id },
+      if (context.User) {
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
           { $pull: { announcements: announcement } },
           {new: true }
         );
@@ -176,7 +153,7 @@ const resolvers = {
   //     return donation;
   //   }
   // }
-
+  
 };
 
 module.exports = resolvers;

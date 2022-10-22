@@ -5,7 +5,7 @@ import { USER_LOGIN } from '../utils/mutations';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import Auth from '../utils/auth';
 
-function Login(props) {
+const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(USER_LOGIN);
 
@@ -42,6 +42,7 @@ function Login(props) {
 
   return (
     <>
+
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
           <div>
@@ -60,6 +61,11 @@ function Login(props) {
               </Link>
             </p>
           </div>
+          {data ? (
+        <p> Success! You may now head {' '}
+        <Link to ="/">back to the homepage</Link>
+        </p>
+      ) : (
           <form className="mt-8 space-y-6" onSubmit={handleFormSubmit}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
@@ -94,11 +100,6 @@ function Login(props) {
                 />
               </div>
             </div>
-            {error ? ( 
-              <div>
-              <p className="relative block w-full items-center border  bg-red-600 border-gray-300 px-3 py-2 text-gray-900"> Incorrect email or password</p>
-              </div>
-              ) : null}
             <div>
               <button
                 type="submit"
@@ -111,8 +112,15 @@ function Login(props) {
               </button>
             </div>
           </form>
+        )}
+          {error && (
+            <div className="relative block w-full items-center border  bg-red-600 border-gray-300 px-3 py-2 text-gray-900">
+            {error.message}
+            </div>
+          )}
         </div>
       </div>
+
     </>
   )
 }

@@ -14,7 +14,7 @@ const announcementSchema = new Schema(
         if (date) return date.toLocaleString()
       },
     },
-    name: {
+    username: {
       type: String,
       required: true,
     },

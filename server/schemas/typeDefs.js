@@ -3,17 +3,16 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
   type User {
     _id: ID
-    username: String!
-    email: String!
+    username: String
+    email: String
+    password: String
     comments: [Comment]
+    announcements: [Announcement]
   }
 
-  type EnvOrg {
-    _id: ID
-    name: String!
-    email: String!
-    address: String
-    announcements: [Announcement]
+  type Auth {
+    token: ID!
+    user: User
   }
 
   type Announcement {
@@ -30,40 +29,26 @@ const typeDefs = gql`
     _id: ID
     commentText: String!
   }
-
-  type userAuth {
-    token: ID!
-    user: User
-  }
-
-  type orgAuth {
-    token: ID!
-    org: EnvOrg
-  }
-
+  
   type Query {
-    me: User
+    users: [User]!
     user(userId: ID!): User
-    envorgs: [EnvOrg]
-    envorg(orgId: ID!): EnvOrg!
+    me: User
     announcements: [Announcement]!
     announcement (announcementId: ID!): Announcement!
     comments: [Comment]!
     comment(commentId: ID!): Comment!
-    
   }
 
   type Mutation {
-    createUser(username: String!, password: String!, email: String!): userAuth
-    userLogin(email: String!, password: String!): userAuth
-    createEnvOrg(name: String!, password: String!, email: String!): orgAuth
-    orgLogin(email: String!, password: String!): orgAuth
+    addUser(name: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
     createAnnouncement(announcementText: String!): Announcement
-    updateAnnouncement(orgId: ID!, announcementText: String!): Announcement
-    deleteAnnouncement(orgId: ID!): Announcement
+    updateAnnouncement(userId: ID!, announcementText: String!): Announcement
+    deleteAnnouncement(userId: ID!): Announcement
     createComment(commentText: String!): Comment
     updateComment(userId: ID!, newcommentText: String!): Comment
-    deleteComment(iserId: ID!): Comment
+    deleteComment(userId: ID!): Comment
   }
 
   # type Subscription{

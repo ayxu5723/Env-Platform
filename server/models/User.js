@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
   username: {
@@ -7,21 +8,22 @@ const userSchema = new Schema({
     unique: true,
     trim: true,
   },
-  password: {
-    type: String,
-    required: true,
-  },
   email: {
     type: String,
     required: true,
     unique: true,
-    match: [/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 'Please enter a valid email'],
+    match: [/.+@.+\..+/, 'Must match an email address!'],
   },
-  role: {
+  password: {
     type: String,
-    required: true, 
-    match: [/^(organisation|individual)$/]
+    required: true,
+    minlength: 5,
   },
+  // role: {
+  //   type: String,
+  //   required: true, 
+  //   match: [/^(organisation|individual)$/, 'Please select a valid user type']
+  // },
   comments: [
     {
       type: Schema.Types.ObjectId,
@@ -35,6 +37,21 @@ const userSchema = new Schema({
     }
   ],
 });
+
+// set up pre-save middleware to create password
+userSchema.pre('save', async function (next) {
+  if (this.isNew || this.isModified('password')) {
+    const saltRounds = 10;
+    this.password = await bcrypt.hash(this.password, saltRounds);
+  }
+
+  next();
+});
+
+// compare the incoming password with the hashed password
+userSchema.methods.isCorrectPassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
 const User = model('User', userSchema);
 
