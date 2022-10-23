@@ -27,13 +27,13 @@ const userSchema = new Schema({
   comments: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'comments',
+      ref: 'Comment',
     }
   ],
   announcements: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'announcements',
+      ref: 'Announcement',
     }
   ],
 });

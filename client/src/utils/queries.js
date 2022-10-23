@@ -25,3 +25,14 @@ export const QUERY_ME = gql`
       }
     }
   `;
+
+export const QUERY_ANNOUNCEMENTS = gql`
+query announcements {
+  announcements {
+    announcementText
+      commentCount {
+        commentText
+      }
+    }
+  }
+`;

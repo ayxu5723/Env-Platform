@@ -6,8 +6,8 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
-    comments: [Comment]
-    announcements: [Announcement]
+    comments: [Comment]!
+    announcements: [Announcement]!
   }
 
   type Auth {
@@ -18,6 +18,9 @@ const typeDefs = gql`
   type Announcement {
     _id: ID
     announcementText: String!
+    username: String!
+    createdAt: String
+    comments: [Comment!]!
   }
 
   type Donation {
@@ -28,16 +31,18 @@ const typeDefs = gql`
   type Comment {
     _id: ID
     commentText: String!
+    username: String!
+    createdAt: String
   }
   
   type Query {
     users: [User]!
     user(userId: ID!): User
     me: User
-    announcements: [Announcement]!
-    announcement (announcementId: ID!): Announcement!
-    comments: [Comment]!
-    comment(commentId: ID!): Comment!
+    announcements: [Announcement!]!
+    announcement (announcementId: ID!): Announcement
+    comments: [Comment!]!
+    comment(commentId: ID!): Comment
   }
 
   type Mutation {
@@ -45,10 +50,10 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     createAnnouncement(announcementText: String!): Announcement
     updateAnnouncement(userId: ID!, announcementText: String!): Announcement
-    deleteAnnouncement(userId: ID!): Announcement
+    deleteAnnouncement(announcementId: ID!): Announcement
     createComment(commentText: String!): Comment
     updateComment(userId: ID!, newcommentText: String!): Comment
-    deleteComment(userId: ID!): Comment
+    deleteComment(announcementId: ID!): Comment
   }
 
   # type Subscription{

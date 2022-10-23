@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
 
 const announcementSchema = new Schema(
   {
@@ -8,20 +9,21 @@ const announcementSchema = new Schema(
       maxlength: 280,
       minlength: 1,
     },
-    createdAt: {
-      type: Date,
-      get: (date) => {
-        if (date) return date.toLocaleString()
-      },
-    },
     username: {
       type: String,
       required: true,
+      trim: true,
     },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: (timestamp) => dateFormat(timestamp),
+    },
+
     comments: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'comments',
+        ref: 'Comment',
       },
     ]
   },
@@ -38,6 +40,6 @@ announcementSchema.virtual('commentCount').get(function () {
   return this.comments.length;
 });
 
-const Announcements = model('announcement', announcementSchema);
+const Announcements = model('Announcement', announcementSchema);
 
 module.exports = Announcements;

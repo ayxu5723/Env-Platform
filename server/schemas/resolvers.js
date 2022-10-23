@@ -11,26 +11,35 @@ const resolvers = {
     user: async (parent, { userId }) => {
       return User.findOne({ _id: userId });
     },
-    // By adding context to our query, we can retrieve the logged in user without specifically searching for them
+
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id });
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    announcements: async () => {
-      return Announcements.find();
+    announcements: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Announcements.find(params).sort({ createdAt: -1 });
     },
     announcement: async (parent, { announcementId}) => {
       return Announcements.findOne({ _id: announcementId });
     },
-    comments: async () => {
-      return Comments.find();
+    comments: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Comments.find(params).sort({ createdAt: -1 });
     },
     comment: async (parent, { commentId}) => {
       return Comments.findOne({ _id: commentId });
     },
   },
+
+  // User: {
+  //   announcements: async (parent, args, context) => {
+  //     const userId = parent._id;
+  //     return Announcements.filter((announcement) => announcement.userId === userId)
+  //   },
+  // },
 
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
@@ -55,28 +64,29 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    createAnnouncement: async (parent, { userId, announcementText}, context) => {
+    createAnnouncement: async (parent, { announcementText}, context) => {
       if (context.User) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: userId },
-          {
-            $addToSet: { announcements: announcementText },
-          },
-          {
-            new: true,
-          }
+        const announcement = await Announcements.create({
+          announcementText,
+          username: context.user.username,
+        });
+         
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { announcements: announcement._id}}
         )
-        return updatedUser
+       
+        return announcement
       }
       throw new AuthenticationError('Please Log In to create an announcement')
     },
-
-    updateAnnouncement: async (parent, { userId, announcementId, newAnnouncementText }, context) => {
+//make sure updates are working correctly
+    updateAnnouncement: async (parent, { username, announcementId, newAnnouncementText }, context) => {
       if (context.User) {
-        const updatedUser = await User.findOneAndUpdate(
+        const announcement = await Announcements.findOneAndUpdate(
           { 
-            _id: userId,
-            "anouncement._id": announcementId
+            announcementText,
+            username: context.user.username
           },
           {
             $set: { "announcements.$.text" : newAnnouncementText },
@@ -89,31 +99,37 @@ const resolvers = {
       }
       throw new AuthenticationError('Please Log In to update an announcement')
     },
-    deleteAnnouncement: async (parent, { announcement }, context) => {
+    deleteAnnouncement: async (parent, { announcementId }, context) => {
       if (context.User) {
-        return User.findOneAndUpdate(
+        const announcement = await Announcements.findOneAndDelete ({
+          _id: announcementId,
+          username: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { announcements: announcement } },
-          {new: true }
+          { $pull: { announcements: announcement._id } },
         );
+        return announcement;
       }
       throw new AuthenticationError('Please Log In to delete an announcement')
     },
 
-    createComment: async (parent, { userId, commentText}, context) => {
+    createComment: async (parent, { commentText }, context) => {
       if (context.User) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: userId },
-          {
-            $addToSet: { comments: commentText },
-          },
-          {
-            new: true,
-          }
+        const comment = await Comments.create({
+          commentText,
+          username: context.user.username,
+        });
+         
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { comments: comment._id}}
         )
-        return updatedUser
+       
+        return comment;
       }
-      throw new AuthenticationError('Please Log In to add a comment')
+      throw new AuthenticationError('Please Log In to create an announcement')
     },
 
     updateComment: async (parent, { userId, commentId, newCommentText }, context) => {
@@ -135,13 +151,18 @@ const resolvers = {
       throw new AuthenticationError('Please Log In to update a comment')
     },
 
-    deleteComment: async (parent, { comment }, context) => {
+    deleteComment: async (parent, { commentId }, context) => {
       if (context.User) {
-        return User.findOneAndUpdate(
+        const comment = await Comments.findOneAndDelete ({
+          _id: commentId,
+          username: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { comments: comment } },
-          {new: true }
+          { $pull: { comments: comments._id } },
         );
+        return comment;
       }
       throw new AuthenticationError('Please Log In to delete a comment')
     },
