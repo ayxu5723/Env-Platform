@@ -15,6 +15,8 @@ import Login from './pages/Login';
 import Header from './components/Header';
 import About from './pages/About';
 import Donate from './pages/Donation';
+import PageFooter from './components/PageFooter';
+
 
 
 const httpLink = createHttpLink({
@@ -41,8 +43,9 @@ function App() {
 
     <ApolloProvider client={client}>
       <Router>
-        <div className="flex-column justify-center align-center min-100-vh bg-primary">
+        <div className="h-32 w-full">
           <Header />
+          <div className="h-screen w-full content-center">
           <Routes>
             <Route 
               path="/" 
@@ -69,6 +72,8 @@ function App() {
               element={<SignUp />}
             />
            </Routes>
+           </div>
+           <PageFooter /> 
          </div>
        </Router>
     </ApolloProvider>

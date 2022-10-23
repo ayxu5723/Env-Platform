@@ -6,8 +6,27 @@ export const QUERY_USER = gql`
       _id
       username
       email
+      announcements {
+        _id
+        announcementText
+        createdAt
+      }
       commentCount {
         commentText
+      }
+    }
+  }
+`;
+
+export const QUERY_USERS = gql`
+  query users {
+    user{
+      username
+      email
+      announcements {
+        _id
+        announcementText
+        createdAt
       }
     }
   }
@@ -19,6 +38,11 @@ export const QUERY_ME = gql`
         _id
         username
         email
+        announcements {
+          _id
+          announcementText
+          createdAt
+        }
         commentCount {
           commentText
         }
@@ -29,10 +53,50 @@ export const QUERY_ME = gql`
 export const QUERY_ANNOUNCEMENTS = gql`
 query announcements {
   announcements {
+    _id
     announcementText
-      commentCount {
+    username
+    createdAt
+    }
+  }
+`;
+
+export const QUERY_SINGLE_ANNOUNCEMENT = gql`
+  query announcement($announcementId: ID!) {
+    announcement(announcementId: $announcementId) {
+      _id
+      announcementText
+      username
+      createdAt
+      comments {
+        _id
         commentText
+        username
+        createdAt
       }
+    }
+  }
+`;
+
+export const QUERY_COMMENTS = gql`
+query comments {
+  comments {
+    _id
+    commentText
+    username
+    createdAt
+    }
+  }
+`;
+
+
+export const QUERY_COMMENT = gql`
+query comment($commentId: ID!) {
+  comment (commentId: $commentId) {
+    _id
+    commentText
+    username
+    createdAt
     }
   }
 `;
