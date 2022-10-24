@@ -15,6 +15,7 @@ import Login from './pages/Login';
 import Header from './components/Header';
 import About from './pages/About';
 import Donate from './pages/Donation';
+import Contact from './pages/Contact';
 import PageFooter from './components/PageFooter';
 
 
@@ -56,12 +57,20 @@ function App() {
               element={<About />}
             />
             <Route 
-              path="/userdashboard" 
+              path="/me" 
+              element={<UserDash />}
+            />
+            <Route 
+              path="/userdashboard/:username" 
               element={<UserDash />}
             />
             <Route 
               path="/donate"
               element={<Donate />}
+            />
+            <Route 
+              path="/contact"
+              element={<Contact />}
             />
             <Route 
               path="/login"

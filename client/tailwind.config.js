@@ -7,7 +7,15 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'tree-image': 'url("./assets/images/header_img1.jpg")'
+        'tree-image': 'url("./assets/images/header_img1.jpg")',
+        'ocean-trash-image': 'url("./assets/images/ocean-trash1.jpg")',
+        'pollution-image': 'url("./assets/images/polution.jpg")',
+        'coral-death': 'url("./assets/images/coral_death.jpg")',
+        'forest-fire': 'url("./assets/images/forest-fires1.jpg")',
+        'gbr-image': 'url("./assets/images/gbr1.jpg")',
+        'beach-cleanup1': 'url("./assets/images/BeachCleanUp1.jpg")',
+        'beach-cleanup2': 'url("./assets/images/beach-cleanup2.jpg")'
+
       },
     },
   },

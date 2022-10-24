@@ -14,7 +14,7 @@ const MenuItems = ({showMenu, active}) => {
           <Link to='/about'>About</Link>
         </li>
         <li>
-          <Link to='/'>Donations</Link>
+          <Link to='/donate'>Donations</Link>
         </li>
         <li>
           <Link to='/'>Contact</Link>

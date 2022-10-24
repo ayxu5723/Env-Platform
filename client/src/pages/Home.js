@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'flowbite-react';
+
 
 const Home = () => {
 
@@ -9,11 +9,6 @@ const Home = () => {
         <h1 className='text-8xl'> Tailwind CSS</h1>
         <h3>Join your local community environment group</h3>
         <div className=" gap-2">
-          <div>
-            <Button gradientMonochrome="info">
-              Register Today!
-            </Button>
-          </div>
         </div>
       </div>
       <div className='text-center justify-end content-end w-1/2'>

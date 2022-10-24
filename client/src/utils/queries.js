@@ -11,9 +11,7 @@ export const QUERY_USER = gql`
         announcementText
         createdAt
       }
-      commentCount {
-        commentText
-      }
+
     }
   }
 `;
@@ -43,9 +41,7 @@ export const QUERY_ME = gql`
           announcementText
           createdAt
         }
-        commentCount {
-          commentText
-        }
+
       }
     }
   `;

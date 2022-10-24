@@ -39,13 +39,13 @@ const Signup = () => {
   };
 
   return (
-    <div className="justify-center">
-      <div className="mt-10 sm:mt-0">
-        <div className="md:grid md:grid-cols-3 md:gap-6">
-        <div className="md:col-span-1">
-          <div className="px-4 sm:px-0">
-            <h3 className="text-lg font-medium leading-6 text-gray-900">Register for an Account</h3>
-            <p className="mt-1 text-sm text-gray-600">Use a permanent address where you can receive mail.</p>
+    <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gbr-image bg-center bg-cover">
+      <div className="mt-10 sm:mt-0 bg-slate-600 rounded-md">
+        <div className="md:grid md:grid-cols-3 md:gap-6 justify-center items-center text-center">
+        <div className="md:col-span-1 justify-center">
+          <div className="px-4 sm:px-0 text-center items-center">
+            <h3 className="text-lg font-medium leading-6 text-white py-4">Register for an Account</h3>
+            <p className="flex flex-wrap mt-1 text-sm text-white text-center px-4">Start your journey towards helping the planet.</p>
           </div>
         </div>
         <div className="mt-5 md:col-span-2 md:mt-0">
@@ -74,7 +74,7 @@ const Signup = () => {
                   />
                 </div>
 
-                <div className="col-span-6 sm:col-span-3">
+                <div className="col-span-6 sm:col-span-4">
                   <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                     Username
                   </label>
@@ -88,7 +88,7 @@ const Signup = () => {
                   />
                 </div>
 
-                <div className="col-span-6 sm:col-span-3">
+                <div className="col-span-6 sm:col-span-4">
                   <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
                     Password
                   </label>

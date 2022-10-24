@@ -32,7 +32,7 @@ const Profile = () => {
   }
 
   return (
-    <div>
+    <div className='bg-tree-image w-full h-full bg-cover bg-center flex items-center px-4'>
       <div class="overflow-hidden bg-white shadow sm:rounded-lg">
       <div class="px-4 py-5 sm:px-6">
         <h3 class="text-lg font-medium leading-6 text-gray-900">{userParam ? `${user.username}'s` : 'your'} Profile</h3>
