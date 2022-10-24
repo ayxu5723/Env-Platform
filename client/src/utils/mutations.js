@@ -29,7 +29,37 @@ export const ADD_USER = gql`
 
 export const ADD_ANNOUNCEMENT = gql`
   mutation createAnnouncement($announcementText: String!) {
-    addAnnouncement(announcementText: $announcementText) {
+    createAnnouncement(announcementText: $announcementText) {
+      _id
+      announcementText
+      username
+      createdAt
+      comments {
+        _id
+        commentText
+      }
+    }
+  }
+`;
+
+export const UPDATE_ANNOUNCEMENT = gql`
+  mutation updateAnnouncement($announcementId: ID!, $announcementText: String!) {
+    updateAnnouncement(announcementId: $announcementId, newAnnouncementText: $announcementText) {
+      _id
+      announcementText
+      username
+      createdAt
+      comments {
+        _id
+        commentText
+      }
+    }
+  }
+`;
+
+export const DELETE_ANNOUNCEMENT = gql`
+  mutation deleteAnnouncement($announcementId: ID!) {
+    deleteAnnouncement(announcementId: $announcementId) {
       _id
       announcementText
       username

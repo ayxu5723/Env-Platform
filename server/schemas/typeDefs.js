@@ -49,7 +49,7 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     createAnnouncement(announcementText: String!): Announcement
-    updateAnnouncement(userId: ID!, announcementText: String!): Announcement
+    updateAnnouncement(announcementId: ID!, announcementText: String!): Announcement
     deleteAnnouncement(announcementId: ID!): Announcement
     createComment(commentText: String!): Comment
     updateComment(userId: ID!, newcommentText: String!): Comment

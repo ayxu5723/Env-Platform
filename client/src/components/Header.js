@@ -59,6 +59,12 @@ const Header = () => {
               </Link>
             </li>
             <li>
+              <Link to='/announcements'>
+                <span className="hover:text-cyan-600">Announcements
+                </span>
+              </Link>
+            </li>
+            <li>
               <Link to='/'>
                 <span className="hover:text-cyan-600 bg-indigo-700 border-indigo-700 rounded-md px-8 py-3" onClick={logout}>Logout
                 </span>

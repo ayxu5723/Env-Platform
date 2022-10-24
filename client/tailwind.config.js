@@ -9,7 +9,7 @@ module.exports = {
       backgroundImage: {
         'tree-image': 'url("./assets/images/header_img1.jpg")',
         'ocean-trash-image': 'url("./assets/images/ocean-trash1.jpg")',
-        'pollution-image': 'url("./assets/images/polution.jpg")',
+        'pollution-image': 'url("./assets/images/pollution.jpg")',
         'coral-death': 'url("./assets/images/coral_death.jpg")',
         'forest-fire': 'url("./assets/images/forest-fires1.jpg")',
         'gbr-image': 'url("./assets/images/gbr1.jpg")',

@@ -1,4 +1,5 @@
 import React from 'react'
+import ContactForm from '../components/ContactForm';
 
 const Contact = () => {
   return (
@@ -10,11 +11,7 @@ const Contact = () => {
       </div>
     </div>
     <div className='text-center justify-end content-end w-1/2'>
-      <div className='flex flex-wrap'>
-        <h3 className="uppercase text-white font-extrabold text-4xl">“We are the first generation to feel the effect of climate change and the last generation who can do something about it.” - 
-          <span className="italic">Barack Obama</span>
-        </h3>
-      </div>
+        <ContactForm />
     </div>
 
 </div> 

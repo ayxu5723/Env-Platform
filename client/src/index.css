@@ -5,6 +5,6 @@
 @layer base {
   button {
     @apply bg-indigo-600 border-indigo-600
-    hover:text-indigo-600 rounded-md
+    hover:text-white rounded-md
   }
 }

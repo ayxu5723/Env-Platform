@@ -17,6 +17,7 @@ import About from './pages/About';
 import Donate from './pages/Donation';
 import Contact from './pages/Contact';
 import PageFooter from './components/PageFooter';
+import Announcements from './pages/Announcements';
 
 
 
@@ -67,6 +68,10 @@ function App() {
             <Route 
               path="/donate"
               element={<Donate />}
+            />
+            <Route 
+              path="/announcements"
+              element={<Announcements />}
             />
             <Route 
               path="/contact"

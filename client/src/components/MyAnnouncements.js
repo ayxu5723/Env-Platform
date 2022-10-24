@@ -2,15 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Accordion } from 'flowbite-react';
 
-const AnnouncementList = ({
+const MyAnnouncementList = ({
   announcements,
   title,
   showTitle = true,
+  showUsername = true,
+  deleteAnnouncement,
   }) => {
   if (!announcements.length) {
     return <h3>No Announcements Yet</h3>;
   }
-  
+
+
+
   return (
     <div>
        {showTitle && <h3>{title}</h3>}
@@ -19,7 +23,7 @@ const AnnouncementList = ({
       <Accordion alwaysOpen={true}>
         <Accordion.Panel key={announcement._id}>
           <Accordion.Title>
-
+            {showUsername ? (
                 <Link
                   className="text-black"
                   to={`/userdashboard/${announcement.username}`}
@@ -29,7 +33,13 @@ const AnnouncementList = ({
                     posted this on {announcement.createdAt}
                   </span>
                 </Link>
-
+              ) : (
+                <>
+                  <span style={{ fontSize: '1rem' }}>
+                    You posted this on {announcement.createdAt}
+                  </span>
+                </>
+              )}
           </Accordion.Title>
           
             <Accordion.Content >
@@ -37,13 +47,12 @@ const AnnouncementList = ({
                 {announcement.announcementText}
               </p>
             </Accordion.Content>
-            <Link
-              className="bg-blue-700 px-3 py-2 border rounded-md"
-              to={`/announcements/${announcement._id}`}
-            >
-              Come see who else is joining.
-            </Link>
-        
+            <button className="bg-blue-700 px-3 py-2 border rounded-md">
+              Edit
+            </button>
+            {deleteAnnouncement && <button className="bg-blue-700 px-3 py-2 border rounded-md" onClick={()=>deleteAnnouncement(announcement._id)}>
+              Delete
+            </button>}
 
         </Accordion.Panel>
       </Accordion> 
@@ -53,4 +62,4 @@ const AnnouncementList = ({
   );
 };
 
-export default AnnouncementList;
+export default MyAnnouncementList;

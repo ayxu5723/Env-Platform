@@ -65,7 +65,7 @@ const resolvers = {
       return { token, user };
     },
     createAnnouncement: async (parent, { announcementText}, context) => {
-      if (context.User) {
+      if (context.user) {
         const announcement = await Announcements.create({
           announcementText,
           username: context.user.username,
@@ -81,11 +81,11 @@ const resolvers = {
       throw new AuthenticationError('Please Log In to create an announcement')
     },
 //make sure updates are working correctly
-    updateAnnouncement: async (parent, { username, announcementId, newAnnouncementText }, context) => {
-      if (context.User) {
+    updateAnnouncement: async (parent, { announcementId, newAnnouncementText }, context) => {
+      if (context.user) {
         const announcement = await Announcements.findOneAndUpdate(
           { 
-            announcementText,
+            _id: announcementId,
             username: context.user.username
           },
           {
@@ -95,12 +95,12 @@ const resolvers = {
             new: true,
           }
         )
-        return updatedUser
+        return announcement
       }
       throw new AuthenticationError('Please Log In to update an announcement')
     },
     deleteAnnouncement: async (parent, { announcementId }, context) => {
-      if (context.User) {
+      if (context.user) {
         const announcement = await Announcements.findOneAndDelete ({
           _id: announcementId,
           username: context.user.username,
@@ -116,7 +116,7 @@ const resolvers = {
     },
 
     createComment: async (parent, { commentText }, context) => {
-      if (context.User) {
+      if (context.user) {
         const comment = await Comments.create({
           commentText,
           username: context.user.username,
@@ -133,7 +133,7 @@ const resolvers = {
     },
 
     updateComment: async (parent, { userId, commentId, newCommentText }, context) => {
-      if (context.User) {
+      if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { 
             _id: userId,
@@ -152,7 +152,7 @@ const resolvers = {
     },
 
     deleteComment: async (parent, { commentId }, context) => {
-      if (context.User) {
+      if (context.user) {
         const comment = await Comments.findOneAndDelete ({
           _id: commentId,
           username: context.user.username,
