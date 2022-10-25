@@ -18,6 +18,7 @@ import Donate from './pages/Donation';
 import Contact from './pages/Contact';
 import PageFooter from './components/PageFooter';
 import Announcements from './pages/Announcements';
+import UpdateSingleAnnouncement from './pages/UpdateSingleAnnouncement';
 
 
 
@@ -62,7 +63,7 @@ function App() {
               element={<UserDash />}
             />
             <Route 
-              path="/userdashboard/:username" 
+              path="/users/:username" 
               element={<UserDash />}
             />
             <Route 
@@ -72,6 +73,10 @@ function App() {
             <Route 
               path="/announcements"
               element={<Announcements />}
+            />
+            <Route 
+              path="/announcements/:announcementId"
+              element={<UpdateSingleAnnouncement />}
             />
             <Route 
               path="/contact"

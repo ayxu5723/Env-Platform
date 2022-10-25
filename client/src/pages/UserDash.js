@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
@@ -11,7 +11,9 @@ import Auth from '../utils/auth';
 import AnnouncementForm from '../components/AnnouncementForm';
 import MyAnnouncementList from '../components/MyAnnouncements';
 
+
 const Profile = () => {
+  const navigate = useNavigate();
   const { username: userParam } = useParams();
 
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
@@ -36,6 +38,14 @@ const Profile = () => {
     }
   };
 
+  const openUpdateSingleAnnouncement = async (announcementId) => {
+    navigate({
+      pathname: '/announcement',
+      search: `${announcementId}`,
+    });
+  };
+
+
   const user = data?.me || data?.user || {};
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to='/me' />;
@@ -55,8 +65,8 @@ const Profile = () => {
   }
 
   return (
-    <div className='bg-tree-image w-full h-full bg-cover bg-center grid md:grid-cols-2 items-center justify-start px-4'>
-      <div class="overflow-hidden bg-white shadow sm:rounded-lg col-auto top-40">
+    <div className='bg-tree-image w-full h-full bg-cover bg-center grid md:grid-cols-2 gap-4 items-center justify-start px-4'>
+      <div class="overflow-hidden bg-white shadow sm:rounded-lg col-span-4 top-40 w-1/2 mt-80 mb-32">
         <div class="px-4 py-5 sm:px-6">
         <h3 class="text-lg font-medium leading-6 text-gray-900">{user.username}'s` Profile</h3>
         <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details</p>
@@ -73,19 +83,19 @@ const Profile = () => {
         </div>
         </dl>
       </div>
-
     </div>
-    <div className="col-auto mb-5 bg-white/80">
+    <div className="col-span-4 mb-5 mt-5 bg-white/80 w-1/2 rounded-md px-5 py-5">
       <h2 className="text-xl text-black">Your Recent Announcements</h2>
         <MyAnnouncementList 
           announcements={user.announcements}
           title={`${user.username}'s announcements`}
           showTitle={false}
           showUsername={false}
+          updateAnnouncement={openUpdateSingleAnnouncement}
           deleteAnnouncement={handleDeleteAnnouncement}
         />
       </div>
-      <div className="col-auto mb-5 bg-white/80 px-4 py-4 rounded-sm">
+      <div className="col-span-4 mb-80 bg-white/80 px-4 py-4 rounded-md w-1/2">
         <AnnouncementForm />
       </div>
       

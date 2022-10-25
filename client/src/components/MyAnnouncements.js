@@ -7,6 +7,7 @@ const MyAnnouncementList = ({
   title,
   showTitle = true,
   showUsername = true,
+  updateAnnouncement,
   deleteAnnouncement,
   }) => {
   if (!announcements.length) {
@@ -47,9 +48,9 @@ const MyAnnouncementList = ({
                 {announcement.announcementText}
               </p>
             </Accordion.Content>
-            <button className="bg-blue-700 px-3 py-2 border rounded-md">
+            {updateAnnouncement && <button className="bg-blue-700 px-3 py-2 border rounded-md" onClick={()=>updateAnnouncement(announcement._id)}>
               Edit
-            </button>
+            </button>}
             {deleteAnnouncement && <button className="bg-blue-700 px-3 py-2 border rounded-md" onClick={()=>deleteAnnouncement(announcement._id)}>
               Delete
             </button>}

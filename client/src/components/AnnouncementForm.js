@@ -67,15 +67,15 @@ const AnnouncementForm = () => {
   };
 
   return(
-    <div>
-      <h3>What have you got going on?</h3>
+    <div className>
+      <h3>What have you got planned?</h3>
 
       {Auth.loggedIn() ? (
         <>
 
-      <form className="flex flex-row justify-center"
-      onSubmit={handleFormSubmit}>
-        <div id="textarea">
+      <form className="flex flex-col justify-center items-center"
+        onSubmit={handleFormSubmit}>
+        <div id="textarea" className = "w-1/2 grid grid-cols-1">
           <div className="mb-2 block">
             <Label
               htmlFor="announcementText"
@@ -90,8 +90,8 @@ const AnnouncementForm = () => {
             onChange={handleChange}
           />
         </div>
-        <div>
-          <button className="rounded-md px-3 py-2 hover:text-white bg-blue-700" type="submit">
+        <div className="grid-cols-1">
+          <button className="rounded-md px-3 py-2 hover:text-white bg-blue-700 mt-5 mb-5" type="submit">
             Post Announcement
           </button>
         </div>
