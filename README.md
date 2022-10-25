@@ -26,6 +26,7 @@ Users are first greeted with the homepage, with tabs leading to information and 
   Once logged in, users are brought straight to their dashboard. They may choose to access recent announcements and update and delete their previous ones.
   <br/><br/>
   ![dashboard](/client/src/assets/images/dashboard.png)
+  Users, or visitors to the site can also make donations which are integrated with Stripe.
 
 
 
@@ -39,5 +40,5 @@ This application was primarily built using ReactJs with a Graphql Apollo server 
 Other packages include express, heroicons, and dotenv.
 
 ## Future Development
-The application is still in its early development stages and lacks the important feature of Google's distance Matrix API. Once implemented, users can add locations to their profile, enabling them to find organizations near them. 
+The application is still in its early development stages and lacks the important feature of Google's distance Matrix API. Once implemented, users can add locations to their profile, enabling them to find organizations near them. The data on display tends to bleed outside of the screen when too much is called, so pagination needs to be implemented in order to keep the pages clean. 
 
