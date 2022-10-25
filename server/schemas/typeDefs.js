@@ -23,6 +23,10 @@ const typeDefs = gql`
     comments: [Comment!]!
   }
 
+  type Donate {
+    session: ID
+  }
+
   type Donation {
     _id: ID
     donationAmount: Float!
