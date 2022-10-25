@@ -11,7 +11,7 @@ export default function Donate() {
             <div className=" gap-2">
             </div>
             </div>
-            <div className='text-center justify-end content-end w-1/2 bg-white/40'>
+            <div className='text-center justify-center content-center w-1/2 bg-white/80 rounded-md'>
                 <div className='flex flex-wrap'>
                  <DonationForm />
                 </div>

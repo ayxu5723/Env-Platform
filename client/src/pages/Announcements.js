@@ -13,7 +13,7 @@ const Announcements = () => {
   console.log(announcements)
   return (
     <div className="w-full h-full bg-pollution-image bg-cover bg-center flex justify-center align-center">
-      <div className="col-auto mb-5 bg-white/80 h-max">
+      <div className="col-auto mb-5 bg-white/80 h-max mt-80 rounded-md px-5 py-5">
         <h2 className="text-xl text-black">Recent Announcements</h2>
           <AnnouncementList 
             announcements={announcements}

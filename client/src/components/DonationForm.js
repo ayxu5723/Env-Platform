@@ -4,10 +4,10 @@ export default function DonationForm() {
 
     const donate = (donationIndex) => {
         console.log(donationIndex)
-    fetch('/donation', {
+        fetch('/donation', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             items: [
@@ -26,39 +26,39 @@ export default function DonationForm() {
 }
     
     return (
-        <div>
+        <div className='w-full justify-center content-center text-xl px-10 py-10 rounded-md'>
             <div className='w-full justify-center content-center text-xl'>
-                <div>
-                    <p>Donate to support the continued development of this platform.</p>
+                <div className="mb-20">
+                    <p>Donations collected will be given to organizations to further their causes.</p>
                 </div>
             </div>
             <div className='justify-center content-center text-lg'>
                 <button
-                className='px-4 py-3 bg-color-indigo'
+                className='px-4 py-3 bg-green-700 mx-3 font-bold'
                 onClick={() => donate(1)}
                 id="button">
                     $5
                 </button>
                 <button
-                className='px-4 py-3 bg-color'
+                className='px-4 py-3 bg-green-700 mx-3 font-bold'
                 onClick={() => donate(2)}
                 id="button">
                     $10
                 </button>
                 <button
-                className='px-4 py-3 bg-color'
+                className='px-4 py-3 bg-green-700 mx-3 font-bold'
                 onClick={() => donate(3)}
                 id="button">
                     $20
                 </button>
                 <button
-                className='px-4 py-3 bg-color'
+                className='px-4 py-3 bg-green-700 mx-3 font-bold'
                 onClick={() => donate(4)}
                 id="button">
                     $50
                 </button>               
                 <button
-                className='px-4 py-3 bg-color'
+                className='px-4 py-3 bg-green-700 mx-3 font-bold'
                 onClick={() => donate(5)}
                 id="button">
                     $100

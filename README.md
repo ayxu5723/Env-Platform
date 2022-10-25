@@ -5,8 +5,10 @@
   This platform application is designed to allow individuals and organizations to connect with each other to work towards bettering the environment.
   <br/> 
   With a simple, user-friendly interface, organizations can post announcements to inform individual users of events, and users can then comment on these announcements. 
+  <br/>
+  Ideally, with a large user base, this will establish a database of organizations for anyone who wishes to contribute to helping the environment.
   
-  Check out the deployed application [here](https://boiling-basin-74246.herokuapp.com/).
+  Check out the deployed application [here](https://peaceful-dusk-77237.herokuapp.com/).
 
 ## Table of Contents
 1.  [Description](#description)<br/>
@@ -17,14 +19,14 @@
 
 
 ## Usage
-Users are first greeted with the homepage, with tabs leading to information about the platform. <br/>
+Users are first greeted with the homepage, with tabs leading to information and donations options for the platform. <br/>
   <br/>
-  ![homepage](/assets/images/homepage.png)
+  ![homepage](/client/src/assets/images/homepage1.png)
   <br/><br/>
-  Once logged in, users are brought straight to their dashboard. They may choose to access recent announcements and make comments, or update and delete their previous ones.
+  Once logged in, users are brought straight to their dashboard. They may choose to access recent announcements and update and delete their previous ones.
   <br/><br/>
-  ![dashboard](/assets/images/dashboard.png)
-  The user is able to comment on other users posts once they are logged in.
+  ![dashboard](/client/src/assets/images/dashboard.png)
+
 
 
 
