@@ -6,7 +6,7 @@ const Home = () => {
   return(
     <div className='bg-tree-image w-full h-full bg-cover bg-center flex items-center px-4'>
       <div className='uppercase text-center text-white font-extrabold w-1/2 justify-center'>
-        <h1 className='text-8xl'> Tailwind CSS</h1>
+        <h1 className='text-8xl'> ENV Platform </h1>
         <h3>Join your local community environment group</h3>
         <div className=" gap-2">
         </div>
